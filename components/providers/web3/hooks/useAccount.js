@@ -21,12 +21,10 @@ export const handler = (web3, provider) => () => {
       provider.on("accountsChanged", (accounts) => mutate(accounts[0] ?? null));
   }, [provider]);
 
-  return {
-    account: {
+  return { 
       data,
       isAdmin: (data && adminAddresses[web3.utils.keccak256(data)]) ?? false,
       mutate,
-      ...rest,
-    },
+      ...rest, 
   };
 };

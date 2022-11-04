@@ -6,16 +6,19 @@ module.exports = {
   ],
   theme: {
     extend: {
+      flex: {
+        2: "2 2 0%",
+      },
       maxWidth: {
-        "8xl": "1920px"
+        "8xl": "1920px",
       },
     },
   },
-  variants:{
+  variants: {
     extend: {
       opacity: ["disabled"],
-      cursor: ["disabled"]
-    }
+      cursor: ["disabled"],
+    },
   },
   plugins: [],
-}
+};

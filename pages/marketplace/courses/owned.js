@@ -1,3 +1,5 @@
+import { Button } from "@components/ui/common";
+import Message from "@components/ui/common/message";
 import { OwnedCourseCard } from "@components/ui/course";
 import { BaseLayout } from "@components/ui/layout";
 import { MarketHeader } from "@components/ui/marketplace";
@@ -9,7 +11,10 @@ export default function OwnedCourses() {
         <MarketHeader />
       </div>
       <section className="grid grid-cols-1">
-        <OwnedCourseCard />
+        <OwnedCourseCard>
+          <Message>My custom message!</Message>
+          <Button>Watch the course</Button>
+        </OwnedCourseCard>
       </section>
     </>
   );

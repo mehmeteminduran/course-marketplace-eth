@@ -7,6 +7,7 @@ const {
 } = require("react");
 
 import detectEthereumProvider from "@metamask/detect-provider";
+import { loadContract } from "utils/loadContract";
 import Web3 from "web3";
 import { setupHooks } from "./hooks/setupHooks";
 
@@ -18,7 +19,7 @@ export default function Web3Provider({ children }) {
     web3: null,
     contract: null,
     isLoading: true,
-    hooks: setupHooks()
+    hooks: setupHooks(),
   });
 
   useEffect(() => {
@@ -26,12 +27,13 @@ export default function Web3Provider({ children }) {
       const provider = await detectEthereumProvider();
       if (provider) {
         const web3 = new Web3(provider);
+        const contract = await loadContract("CourseMarketplace", web3);
         setWeb3Api({
           provider,
           web3,
-          contract: null,
+          contract,
           isLoading: false,
-          hooks:setupHooks(web3,provider)
+          hooks: setupHooks(web3, provider),
         });
       } else {
         setWeb3Api((api) => ({ ...api, isLoading: false }));
@@ -45,7 +47,7 @@ export default function Web3Provider({ children }) {
   const _web3Api = useMemo(() => {
     const { web3, provider, isLoading } = web3Api;
     return {
-      ...web3Api, 
+      ...web3Api,
       requireInstall: !isLoading && !web3,
       connect: provider
         ? async () => {
@@ -70,6 +72,6 @@ export function useWeb3() {
 }
 
 export function useHooks(cb) {
-  const { hooks } = useWeb3(); 
+  const { hooks } = useWeb3();
   return cb(hooks);
 }

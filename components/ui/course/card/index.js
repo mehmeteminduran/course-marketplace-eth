@@ -9,10 +9,10 @@ export default function Card({ course, disabled, Footer }) {
           <Image
             className={`object-cover ${disabled && "filter grayscale"}`}
             src={course.coverImage}
-            alt={course.title}
             layout="responsive"
             width="200"
             height="230"
+            alt={course.title}
           />
         </div>
         <div className="p-8 pb-4 flex-2">
@@ -20,11 +20,11 @@ export default function Card({ course, disabled, Footer }) {
             {course.type}
           </div>
           <Link href={`/courses/${course.slug}`}>
-            <a className="h-12 block mt-1 text-lg leading-tight font-medium text-black hover:underline">
+            <a className="h-12 block mt-1 text-sm sm:text-lg leading-tight font-medium text-black hover:underline">
               {course.title}
             </a>
           </Link>
-          <p className="mt-2 text-gray-500">
+          <p className="mt-2 text-sm sm:text-base text-gray-500">
             {course.description.substring(0, 70)}...
           </p>
           {Footer && <Footer />}
